@@ -1,0 +1,3 @@
+[submodule "IocshDeclWrap"]
+	path = IocshDeclWrap
+	url = https://github.com/paulscherrerinstitute/IocshDeclWrap.git
