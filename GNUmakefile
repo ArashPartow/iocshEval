@@ -8,14 +8,15 @@ EXCLUDE_VERSIONS+=3
 
 OPT_CXXFLAGS_YES = -O3
 
-USR_INCLUDES += -I./IocshDeclWrap/iocshDeclWrapper.h
+#USR_INCLUDES += -I./IocshDeclWrap/iocshDeclWrapper.h
+#USR_INCLUDES += -I./IocshDeclWrap
+#USR_INCLUDES += -I./exprtk
 
-SOURCES += iocshExtrasWrapper.cpp
-SOURCES += iocshExtras.cpp
+SOURCES += iocshEvalWrapper.cpp
+SOURCES += iocshEval.cpp
 SOURCES += evalExprTK.cpp
 
-HEADERS += iocshExtras.hpp
+HEADERS += iocshEval.hpp
 #HEADERS += evalExprTK.hpp
 
-DBDS += iocshExtrasWrapper.dbd
-
+DBDS += iocshEvalWrapper.dbd

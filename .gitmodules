@@ -1,3 +1,6 @@
 [submodule "IocshDeclWrap"]
 	path = IocshDeclWrap
 	url = https://github.com/paulscherrerinstitute/IocshDeclWrap.git
+[submodule "exprtk"]
+	path = exprtk
+	url = https://github.com/ArashPartow/exprtk.git

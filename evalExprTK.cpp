@@ -1,45 +1,49 @@
+#include <iostream>
 #include <string.h>
 #include <stdio.h>
-#include "exprtkWrap.h"
+//#include "exprtkWrap.h"
+#include "exprtk/exprtk.hpp"
+
+#include <stdexcept>
 
 #define ENVSETCALC_RESULT_VAR "RESULT"
 
-int evalExprTK(const char* expression, double *result) {
+int evalExprTK(const char* expressionStr, double *result) {
 
-  // Evaluate expression
-  exprtkWrap *exprtk = new exprtkWrap();
-  if(!exprtk) {
-     printf ("Failed allocation of exprtk expression parser.\n");
+  typedef exprtk::symbol_table<double> symbol_table_t;
+  typedef exprtk::expression<double>     expression_t;
+  typedef exprtk::parser<double>             parser_t;
+  typedef exprtk::parser_error::type error_t;
+
+  std::string expression_str = expressionStr;
+
+  // Instantiate symbol_table
+  symbol_table_t symbol_table;
+
+  // Instantiate expression and register symbol_table
+  expression_t expression;
+  expression.register_symbol_table(symbol_table);
+
+  // Instantiate parser and compile the expression
+  parser_t parser;
+  try {
+    if(!parser.compile(expression_str,expression)) throw std::runtime_error(parser.error().c_str());
+  } catch (std::exception& e) {
+    std::cerr << "exception caught: " << e.what() << '\n';
+    for (std::size_t i = 0; i < parser.error_count(); ++i){
+      const error_t error = parser.get_error(i);
+      char errMsg [100];
+      snprintf ( errMsg, 100, "Error: %02d Position: %02d Type: [%s] Msg: %s Expr: %s\n",
+                        static_cast<int>(i),
+                        static_cast<int>(error.token.position),
+                        exprtk::parser_error::to_str(error.mode).c_str(),
+                        error.diagnostic.c_str(),
+                        expression_str.c_str());
+      fprintf( stderr,  errMsg);
+      }
     return 1;
   }
-  double resultDouble = 0;
 
-  exprtk->addVariable(ENVSETCALC_RESULT_VAR, resultDouble);
-
-  std::string exprStr="";
-
-  // Check if "RESULT" variable in str. If not then simple expression.. Add in beginning
-  if(strstr(expression,ENVSETCALC_RESULT_VAR)) {
-    exprStr = expression;   
-  }
-  else {
-    exprStr = ENVSETCALC_RESULT_VAR;   
-    exprStr += ":=";
-    exprStr += expression;       
-  }
-
-  //Check if need to add ";" last
-  if(exprStr.c_str()[strlen(exprStr.c_str())-1] != ';') {
-    exprStr += ";";
-  }
-  
-  if(exprtk->compile(exprStr)) {
-    printf ("Failed compile of expression with error message: %s.\n", exprtk->getParserError().c_str());
-    return 1;
-  }
-  exprtk->refresh();
-  delete exprtk;  // not needed anymore (result in "resultDouble")
-
-  *result = resultDouble;
+  *result = expression.value();
   return 0;
 }

@@ -1,6 +1,6 @@
-#ifndef IOCSHEXTRAS_H_
-#define IOCSHEXTRAS_H_
+#ifndef IOCSHEVAL_H_
+#define IOCSHEVAL_H_
 
 int epicsEnvSetTernary(const char *envVarName, const char *expression, const char *trueString, const char *falseString);
 
-#endif  /* IOCSHEXTRAS_H_ */
+#endif  /* IOCSHEVAL_H_ */
