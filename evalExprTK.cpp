@@ -1,19 +1,15 @@
 #include <iostream>
 #include <string.h>
-#include <stdio.h>
-//#include "exprtkWrap.h"
-#include "exprtk/exprtk.hpp"
-
 #include <stdexcept>
 
-#define ENVSETCALC_RESULT_VAR "RESULT"
+#include "exprtk/exprtk.hpp"
 
 int evalExprTK(const char* expressionStr, double *result) {
 
   typedef exprtk::symbol_table<double> symbol_table_t;
   typedef exprtk::expression<double>     expression_t;
   typedef exprtk::parser<double>             parser_t;
-  typedef exprtk::parser_error::type error_t;
+  typedef exprtk::parser_error::type          error_t;
 
   std::string expression_str = expressionStr;
 
