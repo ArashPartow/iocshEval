@@ -21,8 +21,9 @@
 
 #include <epicsExit.h>
 #include <epicsThread.h>
-#include <errlog.h>
 #include <epicsExport.h>
+#include <epicsVersion.h>
+#include <errlog.h>
 #include <iocsh.h>
 #include <envDefs.h>
 
@@ -32,8 +33,12 @@ int epicsEnvSetTernary(const char *envVarName, const char *expression, const cha
   double resultDouble = 0;
   // TODO, throw an exception here?
   if(evalExprTK(expression, &resultDouble) != 0) {
-    // Is this in base or PSI specific?
-    epicsEnvUnset(envVarName);
+    #ifdef EPICS_VERSIONS_7
+      epicsEnvUnset(envVarName);
+    #else
+      epicsEnvSet(envVarName,"ERROR");
+    #endif
+
     return 1;
   }
   if(resultDouble) {
