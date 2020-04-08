@@ -1,3 +1,24 @@
+/**
+ * \file iocshEval.cpp
+ *
+ * \defgroup iocshEval
+ *
+ * \brief Provides iocshFunctions for expression evaluation
+ *
+ * This package provides the ability to evaluated mathematical expression
+ *
+ * \note this is work in progress
+ *
+ * \author Dr. Niko Kivel
+ *
+ * \version 0.1
+ *
+ * \date 2020/04
+ *
+ * Contact: niko.kivel@psi.ch
+ *
+ */
+
 #include <epicsExit.h>
 #include <epicsThread.h>
 #include <errlog.h>

@@ -1,3 +1,22 @@
+/**
+ * \file evalExprTK.cpp
+ *
+ * \ingroup iocshEval
+ *
+ * \brief expression evalator
+ *
+ * This file hold functions for the expression evaluation.
+ *
+ * \author Dr. Niko Kivel
+ *
+ * \version 0.1
+ *
+ * \date 2020/04
+ *
+ * Contact: niko.kivel@psi.ch
+ *
+ */
+
 #include <iostream>
 #include <string.h>
 #include <stdexcept>
