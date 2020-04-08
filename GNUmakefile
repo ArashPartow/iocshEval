@@ -3,8 +3,8 @@ include /ioc/tools/driver.makefile
 BUILDCLASSES = Linux
 
 # build just for RHEL for now
-ARCH_FILTER = RHEL%
-ARCH_FILTER = SL6%
+ARCH_FILTER  = RHEL%
+ARCH_FILTER += SL6%
 
 # do not build for Epics3+
 EXCLUDE_VERSIONS += 3.14.8 3.15 3.16 7.0.1

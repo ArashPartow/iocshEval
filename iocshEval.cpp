@@ -22,10 +22,21 @@
 #include <epicsExit.h>
 #include <epicsThread.h>
 #include <epicsExport.h>
-#include <epicsVersion.h>
 #include <errlog.h>
 #include <iocsh.h>
 #include <envDefs.h>
+
+// the iocshFunction _epicsEnvUnset_ is not part of Epics base < v7
+// fortunately Dirk Zimoch implemented this, the header will only be loaded
+// for Epics base < v7
+#include <epicsVersion.h>
+#ifndef EPICS_VERSION_INT
+#define VERSION_INT(V,R,M,P) ( ((V)<<24) | ((R)<<16) | ((M)<<8) | (P))
+#endif
+
+#if !defined(EPICS_VERSION_INT) || EPICS_VERSION_INT < VERSION_INT(7,0,0,0)
+#include "epicsEnvUnset.h"
+#endif
 
 #include "evalExprTK.hpp"
 
@@ -33,12 +44,8 @@ int epicsEnvSetTernary(const char *envVarName, const char *expression, const cha
   double resultDouble = 0;
   // TODO, throw an exception here?
   if(evalExprTK(expression, &resultDouble) != 0) {
-    #ifdef EPICS_VERSIONS_7
-      epicsEnvUnset(envVarName);
-    #else
-      epicsEnvSet(envVarName,"ERROR");
-    #endif
-
+    epicsEnvUnset(envVarName);
+    
     return 1;
   }
   if(resultDouble) {
