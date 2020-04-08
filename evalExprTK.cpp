@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdexcept>
 
-#include "exprtk/exprtk.hpp"
+#include "exprtk.hpp"
 
 int evalExprTK(const char* expressionStr, double *result) {
 
@@ -24,19 +24,19 @@ int evalExprTK(const char* expressionStr, double *result) {
   parser_t parser;
   try {
     if(!parser.compile(expression_str,expression)) throw std::runtime_error(parser.error().c_str());
-  } catch (std::exception& e) {
+  } catch(std::exception& e) {
     std::cerr << "exception caught: " << e.what() << '\n';
-    for (std::size_t i = 0; i < parser.error_count(); ++i){
+    for(std::size_t i = 0; i < parser.error_count(); ++i){
       const error_t error = parser.get_error(i);
       char errMsg [100];
-      snprintf ( errMsg, 100, "Error: %02d Position: %02d Type: [%s] Msg: %s Expr: %s\n",
-                        static_cast<int>(i),
-                        static_cast<int>(error.token.position),
-                        exprtk::parser_error::to_str(error.mode).c_str(),
-                        error.diagnostic.c_str(),
-                        expression_str.c_str());
+      snprintf( errMsg, 100, "Error: %02d Position: %02d Type: [%s]\nMsg: %s Expr: %s\n",
+                              static_cast<int>(i),
+                              static_cast<int>(error.token.position),
+                              exprtk::parser_error::to_str(error.mode).c_str(),
+                              error.diagnostic.c_str(),
+                              expression_str.c_str());
       fprintf( stderr,  errMsg);
-      }
+    }
     return 1;
   }
 
