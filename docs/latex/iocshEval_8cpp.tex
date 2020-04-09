@@ -1,0 +1,53 @@
+\hypertarget{iocshEval_8cpp}{\section{iocsh\-Eval.\-cpp File Reference}
+\label{iocshEval_8cpp}\index{iocsh\-Eval.\-cpp@{iocsh\-Eval.\-cpp}}
+}
+{\ttfamily \#include $<$epics\-Exit.\-h$>$}\\*
+{\ttfamily \#include $<$epics\-Thread.\-h$>$}\\*
+{\ttfamily \#include $<$epics\-Export.\-h$>$}\\*
+{\ttfamily \#include $<$errlog.\-h$>$}\\*
+{\ttfamily \#include $<$iocsh.\-h$>$}\\*
+{\ttfamily \#include $<$env\-Defs.\-h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$stdexcept$>$}\\*
+{\ttfamily \#include $<$epics\-Version.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}epics\-Env\-Unset.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}eval\-Expr\-T\-K.\-hpp\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{iocshEval_8cpp_aec3b51ad3030e7a0894015698908ee00}{\#define \hyperlink{iocshEval_8cpp_aec3b51ad3030e7a0894015698908ee00}{V\-E\-R\-S\-I\-O\-N\-\_\-\-I\-N\-T}(V, R, M, P)~( ((V)$<$$<$24) $|$ ((R)$<$$<$16) $|$ ((M)$<$$<$8) $|$ (P))}\label{iocshEval_8cpp_aec3b51ad3030e7a0894015698908ee00}
+
+\begin{DoxyCompactList}\small\item\em function for E\-P\-I\-C\-S version handling \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{iocshEval_8cpp_a8ecf8cdbc2d6791c37b22ae314aeb7ed}{epics\-Env\-Set\-Ternary} (const char $\ast$env\-Var\-Name, const char $\ast$expression, const char $\ast$true\-String, const char $\ast$false\-String)
+\begin{DoxyCompactList}\small\item\em ternary evalation, result $>$=1 ==$>$ T\-R\-U\-E, result $<$1 ==$>$ F\-A\-L\-S\-E \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{iocshEval_8cpp_a8ecf8cdbc2d6791c37b22ae314aeb7ed}{\index{iocsh\-Eval.\-cpp@{iocsh\-Eval.\-cpp}!epics\-Env\-Set\-Ternary@{epics\-Env\-Set\-Ternary}}
+\index{epics\-Env\-Set\-Ternary@{epics\-Env\-Set\-Ternary}!iocshEval.cpp@{iocsh\-Eval.\-cpp}}
+\subsubsection[{epics\-Env\-Set\-Ternary}]{\setlength{\rightskip}{0pt plus 5cm}int epics\-Env\-Set\-Ternary (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{env\-Var\-Name, }
+\item[{const char $\ast$}]{expression, }
+\item[{const char $\ast$}]{true\-String, }
+\item[{const char $\ast$}]{false\-String}
+\end{DoxyParamCaption}
+)}}\label{iocshEval_8cpp_a8ecf8cdbc2d6791c37b22ae314aeb7ed}
+
+
+ternary evalation, result $>$=1 ==$>$ T\-R\-U\-E, result $<$1 ==$>$ F\-A\-L\-S\-E 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env\-Var\-Name} & iocsh environment variable to set \\
+\hline
+{\em expression} & expression to evaluate \\
+\hline
+{\em true\-String} & string to set the env\-Var to if T\-R\-U\-E \\
+\hline
+{\em false\-String} & string to set the env\-Var to if F\-A\-L\-S\-E \\
+\hline
+\end{DoxyParams}

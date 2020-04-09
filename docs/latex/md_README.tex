@@ -1,0 +1,29 @@
+Use the evaluation of mathematical expression to set environment variables.
+
+So far only one iocsh\-Function is implemented {\ttfamily epics\-Env\-Set\-Ternary}. As the name suggests, this function will set an environment variable based on the evaluation of a ternary expression.
+
+\subsection*{expr\-T\-K}
+
+This module uses \href{https://github.com/ArashPartow/exprtk}{\tt expr\-T\-K} for expression evaluation. Please refer to the manual for examples.
+
+\subsection*{Example}
+
+\subsubsection*{basic proof of principle}
+
+```ioch\-Sh epics\-Env\-Set\-Ternary(\char`\"{}my\-Env\-Var\char`\"{}, \char`\"{}5$>$4\char`\"{}, \char`\"{}yes\char`\"{}, \char`\"{}no\char`\"{}) ``{\ttfamily  This will set}my\-Env\-Var` to {\itshape yes}
+
+\subsubsection*{more useful example}
+
+In this example a specific script will be executed depending on whether {\itshape S\-Y\-S\-\_\-\-I\-D} is 64 or 76 or not.
+
+``` epics\-Env\-Set(\-S\-Y\-S\-\_\-\-I\-D, 64) echo \$\{S\-Y\-S\-\_\-\-I\-D\}
+
+epics\-Env\-Set\-Ternary(\char`\"{}my\-Env\-Var\char`\"{}, \char`\"{}\$\{\-S\-Y\-S\-\_\-\-I\-D\}==64 or \$\{\-S\-Y\-S\-\_\-\-I\-D\}==76\char`\"{}, \char`\"{}add\-Device\-Type1.\-iocsh\char`\"{}, \char`\"{}add\-Device\-Type2.\-iocsh\char`\"{})
+
+run\-Script(\char`\"{}\$\{my\-Env\-Var\}\char`\"{}) ```
+
+\subsubsection*{real life example}
+
+Assume all mirrors in Swiss\-F\-E\-L optics have the same tripod for vertical, roll an pitch motion. Only difference is the orientation of the legs. Thus, the kinematics for complex motion is different. The add\-\_\-device.\-cmd subsequently uses {\ttfamily run\-Script} to load the respective motor and kinematics configuration. Instead of having separate modules, or cryptic macros, the filename of can be stored in an environment variable automatically, based on the {\itshape S\-Y\-S} macro.
+
+``` epics\-Env\-Set(\char`\"{}\-S\-Y\-S\char`\"{}, \char`\"{}\-S\-A\-T\-O\-P11-\/\-O\-O\-M\-V094\char`\"{}) epics\-Env\-Set\-Ternary(\char`\"{}\-T\-R\-I\-P\-O\-D\-\_\-\-C\-O\-N\-F\-I\-G\char`\"{}, \char`\"{}'\-O\-O\-M\-V' in '\$\{\-S\-Y\-S\}'\char`\"{}, \char`\"{}vertical.\-cfg\char`\"{}, \char`\"{}horizontal.\-cfg\char`\"{}) \#-\/ load tripod configuration run\-Script(\char`\"{}\$\{\-T\-R\-I\-P\-O\-D\-\_\-\-C\-O\-N\-F\-I\-G\}\char`\"{}) ``` 

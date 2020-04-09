@@ -7,6 +7,10 @@
  *
  * This package provides the ability to evaluated mathematical expression
  *
+ * The original idea for this feature came from Anders Sandstroem, ESS, Lund, Sweden.
+ * He has a function w/ the same functionality in his [ECMC](https://github.com/epics-modules/ecmc/) project.
+ * I mearly took the idea and wrapped it differently.
+ *
  * \note this is work in progress
  *
  * \author Dr. Niko Kivel
@@ -34,6 +38,9 @@
 // for Epics base < v7
 #include <epicsVersion.h>
 #ifndef EPICS_VERSION_INT
+/**
+ * \brief function for EPICS version handling
+ */
   #define VERSION_INT(V,R,M,P) ( ((V)<<24) | ((R)<<16) | ((M)<<8) | (P))
 #endif
 
