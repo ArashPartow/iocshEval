@@ -26,6 +26,6 @@
   * \param expression expression to evaluate
   * \param result pointer to the result
   */
-int evalExprTK(const char* expression, double *result);
+void evalExprTK(const char* expression, double *result);
 
 #endif  /* EVALEXPRTK_H_ */
