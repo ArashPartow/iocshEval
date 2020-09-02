@@ -7,7 +7,7 @@ ARCH_FILTER  = RHEL%
 ARCH_FILTER += SL6%
 
 # do not build for Epics3+
-EXCLUDE_VERSIONS += 3.14.8 3.15 3.16 7.0.1
+EXCLUDE_VERSIONS += 3.14.8 3.15 3.16 7.0.1 7.0.3
 
 OPT_CXXFLAGS_YES = -O3
 
@@ -21,3 +21,4 @@ SOURCES += iocshEval.cpp
 SOURCES += evalExprTK.cpp
 
 DBDS += iocshEvalWrapper.dbd
+
