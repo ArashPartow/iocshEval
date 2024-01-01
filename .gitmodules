@@ -3,4 +3,5 @@
 	url = https://github.com/paulscherrerinstitute/IocshDeclWrap.git
 [submodule "exprtk"]
 	path = exprtk
-	url = https://github.com/ArashPartow/exprtk.git
+    url = https://github.com/ArashPartow/exprtk.git
+    branch = release
